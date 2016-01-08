@@ -910,7 +910,8 @@ input{
 #eighth>select{
      margin: 10px;
      padding-top: 5px;
-     
+     cursor: default;
+     background-color: inherit;
 }
 
 .contactMessage{
