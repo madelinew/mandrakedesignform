@@ -1,0 +1,428 @@
+
+<!doctype html>
+
+<html lang="en">
+<head>
+	<!--META TAGS-->
+	<META charset="utf-8">
+    
+	<!--FONTS-->
+	<link href='http://fonts.googleapis.com/css?family=Abel|Playfair+Display:900italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lora:700,700italic' rel='stylesheet' type='text/css'>
+
+	<!--JAVASCRIPT-->
+	<script src="script/jquery.js"></script>
+	<script src="script/jquery-ui.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="script/jquery.parallax-1.1.3.js"></script>
+	<script type="text/javascript" src="script/jquery.localscroll-1.2.7-min.js"></script>
+	<script type="text/javascript" src="script/jquery.scrollTo-1.4.2-min.js"></script>
+	<script type="text/javascript" src="script/Wallop.min.js"></script>
+	<SCRIPT src="script/jquery-scrollto.js"></SCRIPT>
+	
+	<!-- CSS -->
+	<LINK rel="stylesheet" type="text/css" href="main.css">
+    
+	<!-- FAVICON -->
+	<LINK rel="icon" type="image/png" href="images/favicon.png"/>
+    
+	<!-- TITLE -->
+	<TITLE>Mandrake Design</TITLE>
+	
+	<script type="text/javascript">
+       
+		$(document).ready(function(){
+			
+			$('#nav').localScroll(800);
+			
+			//.parallax(xPosition, speedFactor, outerHeight) options:
+			//xPosition - Horizontal position of the element
+			//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+			//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+			$('#intro').parallax("50%", 0.1);
+			$('#second').parallax("50%", 0.3);
+			$('.bg').parallax("50%", 0.4);
+			$('.logo').parallax("50%", 1.4);
+			$('#third').parallax("50%", 0.1);
+			
+			$('#sixth').parallax("50%", 0.5);
+			//$('#eighth').parallax("50%", 0.5);
+			
+		});
+	</script>
+</head>
+<body>
+	<SCRIPT>
+		jQuery(function($) {
+			$(document).ready(function(){
+				
+				//VARIABLES
+				var contact = $(".contact");
+				var close = $("#close-message");
+				var form = $("#contactus");
+				var hamburger = $("#menu-burger");
+				var nav = $("#nav-ul");
+				var midlayer = $('#midlayer');
+				var $document = $(document),
+				$logo = $('.logo');
+				
+				
+				//SCROLLTO() FUNCTIONS
+				$('#portfolio-link').click(function(){
+					$('.portfolio-section').ScrollTo(1400);
+				});
+				
+				$('.top-circle').click(function(){
+					$('#second').ScrollTo(1400);
+				});
+				$('.intro-circle').click(function(){
+					$('#third').ScrollTo(1400);
+				});
+				$('.about-circle').click(function(){
+					$('#fourth').ScrollTo(1400);
+				});
+				$('.portfolio-circle').click(function(){
+					$('#sixth').ScrollTo(1400);
+				});
+				$('.team-circle').click(function(){
+					$('.footer').ScrollTo(1400);
+				});
+				
+				
+				//MENU EFFECTS
+				hamburger.mouseenter(function(){
+				    nav.slideDown(700);
+				    midlayer.addClass('rotate-layer');
+				});
+				
+				//NAV EFFECTS
+				nav.mouseleave(function(){
+				    nav.slideUp(700);
+				    midlayer.removeClass('rotate-layer');
+				});
+				
+				//LOGO HIDE/SHOW ON SCROLL
+				$logo.hide();
+				$logo.fadeIn(1100);
+				
+				//ON SCROLL ANIMATIONS TESTING
+				var $animation_elements = $('.animation-element');
+				//var $top_div = $('#second');
+				var $window = $(window);
+				
+				function check_if_in_view() {
+					var window_height = $window.height();
+					var window_top_position = $window.scrollTop();
+					var window_bottom_position = (window_top_position + window_height);
+				       
+				       //ANIMATION-ELEMENTS
+					$.each($animation_elements, function() {
+						var $element = $(this);
+						var element_height = $element.outerHeight();
+						var element_top_position = $element.offset().top;
+						var element_bottom_position = (element_top_position + element_height);
+					     
+						//check to see if this current container is within viewport
+						if ((element_bottom_position >= window_top_position) &&
+							(element_top_position <= window_bottom_position)) {
+							$element.addClass('in-view');
+						} else {
+							$element.removeClass('in-view');
+						}
+					});
+					
+					
+				}
+				
+				$window.on('scroll resize', check_if_in_view);
+				$window.trigger('scroll');
+				
+				var wallopEl = document.querySelector('.Wallop');
+				var wallop = new Wallop(wallopEl);
+			});
+			
+			
+			//SIDE DOTS
+			
+			$('.ref-circle').mouseenter(function(){
+				$(this).addClass('hover-circle');	
+			});
+			$('.ref-circle').mouseleave(function(){
+				$(this).removeClass('hover-circle');	
+			});
+			
+			var $window = $(window);
+			var $top_div = $('.marker-1');
+			var $intro_div = $('.marker-2');
+			var $about_div = $('.marker-3');
+			var $portfolio_div = $('.marker-4');
+			var $team_div = $('.marker-5');
+			
+			function side_dots(){
+				var window_height = $window.height();
+				var window_top_position = $window.scrollTop();
+				var window_bottom_position = (window_top_position + window_height);
+			       
+			       //TOP DIV
+				$.each($top_div, function() {
+					var $top = $(this);
+					var top_height = $top.outerHeight();
+					var top_top_position = $top.offset().top;
+					var top_bottom_position = (top_top_position + top_height);
+					var top_circle = $('.top-circle');
+					
+					if ((top_bottom_position >= window_top_position) && (top_top_position <= window_bottom_position)) {
+						top_circle.addClass('active-circle');
+						
+					} else {
+						top_circle.removeClass('active-circle');
+					}
+				});
+				
+				//INTRO (THIRD) DIV
+				$.each($intro_div, function() {
+					var $intro = $(this);
+					var top_height = $intro.outerHeight();
+					var top_top_position = $intro.offset().top;
+					var top_bottom_position = (top_top_position + top_height);
+					var intro_circle = $('.intro-circle');
+					
+					if ((top_bottom_position >= window_top_position) && (top_top_position <= window_bottom_position)) {
+						intro_circle.addClass('active-circle');
+						
+					} else {
+						intro_circle.removeClass('active-circle');
+					}
+				});
+				
+				//ABOUT (THIRD) DIV
+				$.each($about_div, function() {
+					var $about = $(this);
+					var top_height = $about.outerHeight();
+					var top_top_position = $about.offset().top;
+					var top_bottom_position = (top_top_position + top_height);
+					var about_circle = $('.about-circle');
+					
+					if ((top_bottom_position >= window_top_position) && (top_top_position <= window_bottom_position)) {
+						about_circle.addClass('active-circle');
+						
+					} else {
+						about_circle.removeClass('active-circle');
+					}
+					
+				});
+				
+				//PORTFOLIO (THIRD) DIV
+				$.each($portfolio_div, function() {
+					var $portfolio = $(this);
+					var top_height = $portfolio.outerHeight();
+					var top_top_position = $portfolio.offset().top;
+					var top_bottom_position = (top_top_position + top_height);
+					var portfolio_circle = $('.portfolio-circle');
+					
+					if ((top_bottom_position >= window_top_position) && (top_top_position <= window_bottom_position)) {
+						portfolio_circle.addClass('active-circle');
+						
+					} else {
+						portfolio_circle.removeClass('active-circle');
+					}
+				});
+				
+				//CONTACT (THIRD) DIV
+				$.each($team_div, function() {
+					var $team = $(this);
+					var top_height = $team.outerHeight();
+					var top_top_position = $team.offset().top;
+					var top_bottom_position = (top_top_position + top_height);
+					var team_circle = $('.team-circle');
+					
+					if ((top_bottom_position >= window_top_position) && (top_top_position <= window_bottom_position)) {
+						team_circle.addClass('active-circle');
+						
+					} else {
+						team_circle.removeClass('active-circle');
+					}
+				});
+			};
+			
+			$window.on('scroll resize', side_dots);
+			$window.trigger('scroll');
+				
+		});
+	</SCRIPT>
+	
+	
+	
+	
+	<DIV class='nav-container'>
+		<div id='menu-burger'>
+			<div class='burger-layer'></div>
+			<div class='burger-layer' id='midlayer'></div>
+			<div class='burger-layer'></div>
+		</div>
+		<FORM name=loginForm class='loginForm' action='auth.php' method='POST'>
+			<input class='username' type="text" name="username" placeholder="Username">
+			<input class='password' type="password" name="password" placeholder="Password">
+			<button id="loginb" class="login-button" type="submit" value=''>Login</button>
+		</FORM>
+		<UL id='nav-ul'>
+			<LI class='navLink'><A href='#'>What We Offer</A></LI>
+			<LI class='navLink' id='portfolio-link'><A href='#'>Portfolio</A></LI>
+			<LI class='navLink'><A href='#'>Contact Us</A></LI>
+		</UL>
+	</DIV>
+	
+	
+	
+	
+	
+	<div id='side-circles'>
+		<div class='ref-circle top-circle'></div>
+		<div class='ref-circle intro-circle'></div>
+		<div class='ref-circle about-circle'></div>
+		<div class='ref-circle portfolio-circle'></div>
+		<div class='ref-circle team-circle'></div>
+	</div>
+
+	
+	
+	
+
+	<div id="second">
+		<div class='marker-1'></div>
+		<div class="story">
+			<div id="logo" alt='Mandrake Logo' class='logo logoStart'></div>
+			<div id='scroll-down-container'>
+				<div id='scroll-circle'>
+<!--					<img alt='scroll down arrow' class='scroll-arrow' id='scroll-down-arrow' src='images/scroll-arrow.png'>
+-->				</div>
+			</div>
+		</div>
+	</div> 
+	
+	
+	
+	
+	
+	<div id="third">
+		
+		<div class="story">
+			<p class='three-text'>
+				Hello world  we <br>are
+				<span class='three-subtext'>
+					 Mandrake.
+				</span>
+			</p>
+			<img class="rotations animation-element slide-up phone" alt='test' src='images/init-screen.png' >
+		</div>
+		<div class='marker-2'></div>
+	</div>
+	
+	
+	
+	
+	
+	<div id='fourth'>
+		
+		<p class='three-text'>
+			 What we can <br>do for
+			<span class='three-subtext'>
+				 you?
+			</span>
+			<span class='three-sub-subtext'>
+				<br>
+				UI/UX
+				<span class='plus-sign'>+</span>
+				Responsive Design
+				<span class='plus-sign'>+</span>
+				Mobile Design
+				<span class='plus-sign'>+</span>
+				Interactivity 
+			</span>
+			
+		</p>
+		<img class="rotations animation-element slide-up pancakes" alt='test' src='images/pancake-pile.png' >
+		<div class='marker-3'></div>
+	</div>
+	
+	
+	
+	
+	
+	<div id='fifth'>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	<div class='portfolio-section' id="sixth">
+		<p class='three-text'>
+			Some of  our
+			<span class='three-subtext'>
+				 work.
+			</span>
+		</p>
+		<div class='marker-4'></div>
+		<div class="animation-element slide-up laptop ">
+			<div class="Wallop Wallop--fade">
+				<div class="Wallop-list">
+					<div class="Wallop-item ">
+						<img alt='Stephan Laboy' class='slide-photo' src="images/stephan-slide.png" />
+					</div>
+					<div class="Wallop-item">
+						<img alt='Kanye 2020' class='slide-photo' src="images/kanye-slide.png" />
+					</div>
+					<div class="Wallop-item">
+						<img alt='Early Mandrake' class='slide-photo' src="images/mandrake-slide.png" />
+					</div>
+					<div class="Wallop-item Wallop-item--current">
+						<img alt='Chris and Haley' class='slide-photo' src="images/wedding-slide.png" />
+					</div>
+				</div>
+				<button class="Wallop-buttonPrevious prev">
+					<img alt='previous arrow' class='controls-arrow prev-arrow' src='images/prev-arrow.png'>
+				</button>
+				<button class="Wallop-buttonNext next">
+					<img alt='next arrow' class='controls-arrow next-arrow' src='images/next-arrow.png'>
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id='seventh'>
+		<div class='marker-5'></div>
+		<p class='three-text'>
+			Give us <br> a
+			<span class='three-subtext'>
+				 holler!
+			</span>
+		</p>
+
+		<div id="eighth">
+			<form name="contactForm" class="contactForm">
+				<input class="contactName" type="text" name="contactName" placeholder="Contact Name">
+				<input class="contactEmail" type="email" name="contactEmail" placeholder="Email">
+				<input class="contactPhone" type="tel" name="contactTel" placeholder="Phone Number">
+			</form>
+		</div>
+	</div>
+	
+
+	
+	
+	<DIV class='footer'>
+		<A href='https://twitter.com/DesignMandrake'><IMG alt='twitter-icon' src='images/tw.png'></A>
+		<img alt='mandrake icon' src='images/idk-grey.png'>
+		<A href='https://www.facebook.com/jonescommachris'><IMG alt='facebook-icon' src='images/fbk.png'></A>
+		<P class='copyright'>MANDRAKE DESIGN &copy; 2015. ALL RIGHTS RESERVED. VETERAN OWNED.</P>
+		<!--social media buttons-->
+		
+	</DIV><!--END FOOTER-->
+	
+	
+</body>
+</html>
